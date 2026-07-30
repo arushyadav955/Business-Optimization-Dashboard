@@ -1,151 +1,122 @@
-# Business-Optimization-Dashboard
+# 📊 Business Optimization Dashboard
 
-### Dashboard Link : https://app.powerbi.com/links/8It5oxJExr?ctid=014cc2fa-5014-43e5-bbdd-0cbe505529c3&pbi_source=linkShare&utm_source=chatgpt.com
+An interactive Power BI dashboard that analyzes operational efficiency, demand-supply gaps, and profitability trends to support data-driven business decision-making.
 
-## Problem Statement:
+---
 
-This dashboard helps businesses analyze operational efficiency, demand availability, profit trends, and supply shortages to optimize decision-making and improve overall business performance.
+## 📌 Overview
 
-The dashboard provides a centralized view of key business KPIs, enabling organizations to:
+Businesses often struggle to get a unified view of profitability, supply-demand balance, and operational shortages. This dashboard consolidates these metrics into a single, dark-themed, interactive report helping decision-makers quickly spot performance gaps and act on them.
 
-Monitor profit and loss trends
+**Core capabilities:**
+- Monitor profit and loss trends
+- Analyze supply-demand gaps
+- Track operational shortages
+- Evaluate business efficiency metrics
+- Surface optimization opportunities through interactive KPI visuals and slicers
 
-Analyze supply-demand gaps
+---
 
-Track operational shortages
+## 🗂️ Repository Contents
 
-Evaluate business efficiency metrics
+| File | Description |
+|---|---|
+| `Business Optimization Dashboard.pbix` | Power BI Desktop file containing the full report, data model, and DAX measures |
+| `Dataset.csv` | Primary transactional/operational dataset used in the report |
+| `Products.csv` | Product-level reference data |
+| `SQL_Query.sql` | SQL query used for data extraction/preparation |
 
-Identify optimization opportunities
+---
 
-Using interactive KPI visuals and filters, decision-makers can quickly identify performance gaps and take data-driven actions to improve business outcomes.
+## 🧹 SQL Data Preparation
 
-### Steps Followed
+`SQL_Query.sql` handles the data cleaning and preparation pipeline that feeds the Power BI model. It performs the following steps:
 
-Step 1 : Loaded dataset into Power BI Desktop from source file.
+1. **Workspace setup** : creates the `Business_Project` database.
+2. **Initial data check** : pulls all rows from `Dataset` to inspect the raw data.
+3. **Date quality check** : lists distinct order dates, then isolates rows where the date is null or blank.
+4. **Product ID audit** : lists distinct `Product_ID` values to spot inconsistencies.
+5. **Data cleanup** : corrects mismatched product codes via `UPDATE` statements (`Product_ID 21 → 7`, `22 → 11`).
+6. **Re-verification** : re-checks distinct `Product_ID` values (ordered) to confirm the fix.
+7. **Metric sanity checks** : reviews distinct `Availability` and `Demand` values before they're used in KPIs.
+8. **Final join & export** : joins `Dataset` with `Products` on `Product_ID` to bring in `Product_Name` and `Unit_Price`, then writes the result into `new_table` via `SELECT * INTO`.
 
-Step 2 : Opened Power Query Editor and performed data cleaning and preprocessing.
+This produces a single, clean, denormalized table dates, product details, pricing, demand, and availability which is the source loaded into Power BI for the dashboard.
 
-Step 3 : Checked data quality using:
+---
 
-Column Distribution
+## ⚙️ Methodology
 
-Column Quality
+1. Loaded the dataset into Power BI Desktop from the source files
+2. Cleaned and preprocessed data in Power Query Editor
+3. Assessed data quality via Column Distribution, Column Quality, and Column Profile
+4. Handled null values and enforced consistency across columns
+5. Applied transformations required for optimization analysis
+6. Designed a custom dark-themed dashboard for modern visualization
+7. Built KPI cards for key metrics (see below)
+8. Added slicers for interactive, dynamic filtering
+9. Wrote DAX measures for KPI and operational calculations
+10. Laid out the report for readability and business interpretation
+11. Published the report to Power BI Service
 
-Column Profile
+---
 
-Step 4 : Handled null values and ensured consistency across all columns.
+## 📐 DAX Measures
 
-Step 5 : Performed necessary transformations for optimization analysis.
+```DAX
+Total Profit              = SUM(BusinessData[Profit])
+Total Loss                = SUM(BusinessData[Loss])
+Average Daily Loss        = AVERAGE(BusinessData[Daily Loss])
+Average Demand per Day    = AVERAGE(BusinessData[Demand])
+Average Availability per Day = AVERAGE(BusinessData[Availability])
+Total Supply Shortage     = SUM(BusinessData[Supply Shortage])
+```
 
-Step 6 : Applied a custom dark-themed dashboard design for modern visualization aesthetics.
+## 🖼️ Visuals Used
 
-Step 7 : Added KPI card visuals to display important business metrics including:
+- **Cards** : key business KPIs at a glance
+- **KPI Visuals** : tracking optimization metrics over time
+- **Slicers** : interactive filtering for drill-down analysis
 
-Total Profit
+---
 
-Total Loss
+## 📈 Key Insights
 
-Average Daily Loss
+### 1. Profit & Loss
+- Total Profit: **301K**
+- Total Loss: **8M**
+- Average Daily Loss: **2.97K**
 
-Average Demand per Day
+Losses far outweigh profit, pointing to a strong need for operational optimization and cost control.
 
-Average Availability per Day
+### 2. Demand vs. Availability
+- Average Demand per Day: **48.65**
+- Average Availability per Day: **24.70**
 
-Total Supply Shortage
+Demand nearly doubles availability, signaling supply-chain constraints and operational inefficiency.
 
-Step 8 : Added slicers for interactive filtering and dynamic analysis.
+### 3. Supply Shortage
+- Total Supply Shortage: **61K**
 
-Step 9 : Created DAX measures for KPI calculations and operational analysis.
+A shortage of this scale risks customer satisfaction, delivery timelines, and overall performance.
 
-Step 10 : Designed the report layout for better readability and business interpretation.
+### 4. Optimization Opportunities
+- Identify high-loss operational areas
+- Improve supply chain efficiency
+- Reduce daily losses
+- Balance demand and availability
+- Optimize inventory and resource allocation
 
-Step 11 : Published the report to Power BI Service.
+---
 
-### Visuals Used
+## 🛠️ Tools Used
 
-Cards – Representing business KPIs
+- **Power BI Desktop / Service** : data modeling, DAX, visualization, publishing
+- **Power Query** : data cleaning and transformation
+- **SQL** : data extraction and preparation
 
-KPI Visuals – Tracking business optimization metrics
+---
 
-Slicers – Interactive filtering for analysis
+## ✅ Conclusion
 
-### DAX Measures
-
-Following DAX expressions were created for KPI calculations:
-
-Total Profit = SUM(BusinessData[Profit])
-
-Total Loss = SUM(BusinessData[Loss])
-
-Average Daily Loss = 
-AVERAGE(BusinessData[Daily Loss])
-
-Average Demand per Day = 
-AVERAGE(BusinessData[Demand])
-
-Average Availability per Day = 
-AVERAGE(BusinessData[Availability])
-
-Total Supply Shortage = 
-SUM(BusinessData[Supply Shortage])
-
-### Dashboard Snapshot
-
-<img width="1592" height="887" alt="Image" src="https://github.com/user-attachments/assets/a1794706-aa6a-4331-9cbb-ce0110d4c085" />
-
-<img width="1589" height="894" alt="Image" src="https://github.com/user-attachments/assets/dce057d9-2be2-4af5-a160-3bba1b28e3df" />
-
-KPI Overview
-
-Operational Metrics
-
-Insights
-
-A single-page interactive dashboard was created on Power BI Desktop and published to Power BI Service.
-
-Following inferences can be drawn from the dashboard:
-
-1. Profit & Loss Analysis
-
-Total Profit = 301K
-
-Total Loss = 8M
-
-Average Daily Loss = 2.97K
-
-The dashboard highlights that overall losses are significantly higher compared to profit, indicating the need for better operational optimization and cost management strategies.
-
-2. Demand & Availability Analysis
-
-Average Demand per Day = 48.65
-
-Average Availability per Day = 24.70
-
-Demand is considerably higher than resource availability, indicating operational inefficiencies and possible supply-chain constraints.
-
-3. Supply Shortage Analysis
-
-Total Supply Shortage = 61K
-
-The business faces a major supply shortage, which may directly impact customer satisfaction, delivery timelines, and operational performance.
-
-4. Business Optimization Opportunities
-
-Using this dashboard, organizations can:
-
-Identify high-loss operational areas
-
-Improve supply chain efficiency
-
-Reduce daily losses
-
-Balance demand and availability
-
-Optimize inventory and resource allocation
-
-## Conclusion:
-
-The Business Optimization Dashboard provides a comprehensive view of operational performance through interactive KPI monitoring and business analytics.
-
-By leveraging data visualization and optimization insights, businesses can improve efficiency, reduce shortages, and support strategic decision-making through data-driven analysis.
+The Business Optimization Dashboard offers a comprehensive, interactive view of operational performance. By combining KPI monitoring with supply-demand and profitability analysis, it helps organizations identify inefficiencies, reduce shortages, and make faster, data-backed decisions.
