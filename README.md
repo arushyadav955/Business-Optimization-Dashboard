@@ -54,10 +54,9 @@ This produces a single, clean, denormalized table dates, product details, pricin
 5. Applied transformations required for optimization analysis
 6. Designed a custom dark-themed dashboard for modern visualization
 7. Built KPI cards for key metrics (see below)
-8. Added slicers for interactive, dynamic filtering
-9. Wrote DAX measures for KPI and operational calculations
-10. Laid out the report for readability and business interpretation
-11. Published the report to Power BI Service
+8. Wrote DAX measures for KPI and operational calculations
+9. Laid out the report for readability and business interpretation
+10. Published the report to Power BI Service
 
 ---
 
