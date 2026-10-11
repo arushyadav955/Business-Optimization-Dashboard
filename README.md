@@ -75,8 +75,6 @@ Total Supply Shortage     = SUM(BusinessData[Supply Shortage])
 ## 🖼️ Visuals Used
 
 - **Cards** : key business KPIs at a glance
-- **KPI Visuals** : tracking optimization metrics over time
-- **Slicers** : interactive filtering for drill-down analysis
 
 ---
 
